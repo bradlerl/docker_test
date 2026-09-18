@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     next();
 });
 
-const pool = {
+const pool = mysql.createPool({
     host: process.env.mysql.railway.internal,
     user: process.env.root,
     password: process.env.tqTLuPGPAMUmFkVaxxsjIslsAEEiAXvQ,
