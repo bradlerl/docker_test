@@ -1,5 +1,5 @@
 const express = require('express');
-const sql = require('mssql');
+const mysql = require('mysql2/promise');
 const cors = require('cors');
 const app = express();
 
@@ -13,6 +13,14 @@ app.use((req, res, next) => {
     next();
 });
 
+const pool = {
+    host: process.env.mysql.railway.internal,
+    user: process.env.root,
+    password: process.env.tqTLuPGPAMUmFkVaxxsjIslsAEEiAXvQ,
+    database: railway,
+    port: process.env.MYSQLPORT
+});
+
 const config = {
     user: 'Bradrachel',
     password: 'Rach#0605',
@@ -23,9 +31,8 @@ const config = {
 app.get('/api/data', async (req, res) => {
     try {
         console.log("Connecting to SQL Server...")
-        await sql.connect(config);
-        const result = await sql.query`SELECT * FROM Rivals`;
-        res.json(result.recordset);
+        const [rows] = await pool.query('SELECT * FROM Rivals');
+        res.json(rows);
     } catch (err) {
         console.error("SQL ERROR:", err);
         res.status(500).send(err.message);
