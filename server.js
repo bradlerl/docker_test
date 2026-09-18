@@ -32,4 +32,5 @@ app.get('/api/data', async (req, res) => {
     }
 });
 
-app.listen(3001, '10.193.91.232', () => console.log('Server running'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
