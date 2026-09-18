@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Test</title>
+</head>
+<body>
+    <h4>This is to test the sql docker container to see if it works with a webpage.</h4>
+    <pre id="output">Loading...</pre>
+
+    <script>
+        fetch('http://10.193.91.232:3001/api/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').textContent = 
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(err => {
+                document.getElementById('output').textContent = 
+                    'Error: ' + err;
+            });
+    </script>
+</body>
+</html>
